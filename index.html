@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TodoList</title>
+  <style type="text/css">
+    .done{
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <input id="new-todo" type="text"><button id="add-button">add</button>
+  <ul></ul>
+  <script>
+    document.getElementById("new-todo")
+    const button = document.getElementById('add-button');
+    button.addEventListener('click', ()=> {
+      const input = document.getElementById('new-todo');
+      const li = document.createElement('li');
+      li.innerText = input.value;
+      const doneButton = document.createElement('button');
+      doneButton.innerText = 'done';
+      li.appendChild(doneButton);
+      doneButton.addEventListener('click', () => {
+      const li = doneButton.closest('li');
+      li.classList.toggle('done');
+      });
+      const removeButton = document.createElement('input');
+      removeButton.type = 'image';
+      removeButton.src = 'trash-can.jpg';
+      removeButton.style = 'vertical-align: middle;'
+      li.appendChild(removeButton);
+      removeButton.addEventListener('click', () => {
+        const rli = doneButton.closest('li');
+        rli.remove('li');
+      });
+
+      const ul = document.querySelector('ul');
+      ul.appendChild(li);
+    });
+
+        //enterキーで動作
+        document.getElementById("new-todo")
+        .addEventListener("keyup", function(e) {
+        if (e.keyCode === 13) {
+            document.getElementById("add-button").click();
+        }
+    });
+
+    //ボタンを押したら入力削除
+    function cleartext() {
+    document.getElementById("new-todo").value='';
+    }
+    document.getElementById("add-button").addEventListener('click', cleartext);
+
+    //リスト削除
+    const rbutton = document.getElementById('add-button');
+  </script>
+</body>
+</html>
